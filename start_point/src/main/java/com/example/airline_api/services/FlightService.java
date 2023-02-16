@@ -22,6 +22,11 @@ public class FlightService {
         return flightRepository.save(newFlight);
     }
 
+    // Display a specific flight
+    public Flight getFlightById(long id){
+        return flightRepository.findById(id).get();
+    }
+
 
 
 }

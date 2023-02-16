@@ -25,8 +25,9 @@ public class FlightController {
 
     // Display a specific flight
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Flight> getFlightById(){
-        return null;
+    public ResponseEntity<Flight> getFlightById(@PathVariable Long id){
+        Flight flight = flightService.getFlightById(id);
+        return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 
     // Add details of a new flight
@@ -49,4 +50,8 @@ public class FlightController {
         return null;
     }
 
+//    @PatchMapping( id)
+//    public responseneityt<flight> addpassengertoflight(requestbody passenger passenger, pathvariable long id)
+//// flight flight = flight service . addpassengertoflight(id, passenger)
+//return new responseentity<> (aflight, http)
 }
