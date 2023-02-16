@@ -27,6 +27,21 @@ public class FlightService {
         return flightRepository.findById(id).get();
     }
 
+    // Add passenger to flight
+    public Flight addPassengerToFlight(long flightId, Passenger passenger){
+        Flight flight = flightRepository.findById(flightId).get();
+        List<Passenger> passengers = flight.getPassengers();
+        passengers.add(passenger);
+        flight.setPassengers(passengers);
+        flightRepository.save(flight);
+        return flight;
+    }
+
+     // Cancel flight
+    public void cancelFlight(Long id){
+        flightRepository.deleteById(id);
+    }
+
 
 
 }

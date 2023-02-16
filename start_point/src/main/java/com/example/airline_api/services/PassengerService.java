@@ -22,4 +22,6 @@ public class PassengerService {
     public Passenger addNewPassenger(Passenger newPassenger){
         return passengerRepository.save(newPassenger);
     }
+
+
 }
