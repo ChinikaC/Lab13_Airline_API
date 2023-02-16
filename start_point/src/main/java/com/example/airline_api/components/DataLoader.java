@@ -53,11 +53,11 @@ public class DataLoader implements ApplicationRunner {
         flight2.addPassenger(passenger1);
         flightRepository.save(flight2);
 
-        Flight flight3 = new Flight("Tokyo", 200, "18-04-2023", "18:45");
+        Flight flight3 = new Flight("Tokyo", 150, "18-04-2023", "18:45");
         flight3.addPassenger(passenger2);
         flightRepository.save(flight3);
 
-        Flight flight4 = new Flight("Dubai", 200, "14-12-2023", "04:00");
+        Flight flight4 = new Flight("Dubai", 150, "14-12-2023", "04:00");
         flight4.addPassenger(passenger2);
         flightRepository.save(flight4);
 
@@ -69,11 +69,11 @@ public class DataLoader implements ApplicationRunner {
         flight6.addPassenger(passenger3);
         flightRepository.save(flight6);
 
-        Flight flight7 = new Flight("Cape Town", 200, "31-05-2023", "00:00");
+        Flight flight7 = new Flight("Cape Town", 150, "31-05-2023", "00:00");
         flight7.addPassenger(passenger4);
         flightRepository.save(flight7);
 
-        Flight flight8 = new Flight("Paris", 200, "10-04-2023", "14:30");
+        Flight flight8 = new Flight("Paris", 150, "10-04-2023", "14:30");
         flight8.addPassenger(passenger4);
         flightRepository.save(flight8);
 
@@ -85,11 +85,11 @@ public class DataLoader implements ApplicationRunner {
         flight10.addPassenger(passenger5);
         flightRepository.save(flight10);
 
-        Flight flight11 = new Flight("Amsterdam", 200, "08-08-2023", "15:30");
-        flight7.addPassenger(passenger6);
+        Flight flight11 = new Flight("Amsterdam", 150, "08-08-2023", "15:30");
+        flight11.addPassenger(passenger6);
         flightRepository.save(flight11);
 
-        Flight flight12 = new Flight("Chiang Mai", 200, "22-11-2023", "02:45");
+        Flight flight12 = new Flight("Chiang Mai", 150, "22-11-2023", "02:45");
         flight12.addPassenger(passenger6);
         flightRepository.save(flight12);
     }

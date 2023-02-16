@@ -44,5 +44,16 @@ public class FlightService {
         flightRepository.deleteById(id);
     }
 
+    // Prevent passenger from being booked on a flight that is full
+    public boolean canPassengerGetBookedOntoFlight(Flight flight){
+        if(flight.getCapacity() >= 200){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
 
 }

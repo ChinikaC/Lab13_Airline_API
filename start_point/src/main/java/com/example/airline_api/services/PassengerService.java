@@ -23,6 +23,11 @@ public class PassengerService {
         return passengerRepository.save(newPassenger);
     }
 
+    // Get specific passengers
+    public Passenger getPassengerById(long id){
+        return passengerRepository.findById(id).get();
+    }
+
 
 
 
