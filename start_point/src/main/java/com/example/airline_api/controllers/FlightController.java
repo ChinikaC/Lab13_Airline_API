@@ -19,9 +19,14 @@ public class FlightController {
 
     // Display all available flights
     @GetMapping
-    public ResponseEntity<List<Flight>> getAllFlights(){
-        List<Flight> flights = flightService.getAllFlights();
-        return new ResponseEntity<>(flights, HttpStatus.OK);
+    public ResponseEntity<List<Flight>> getAllFlightsAndFilterByDestination(
+            @RequestParam(required = false, name = "destination") String destination){
+        // Filter by destination:
+        List<Flight> flights;
+        if(destination != null){
+            return new ResponseEntity<>(flightService.findFlightByDestination(destination), HttpStatus.OK);
+        } // Get all flights:
+        return new ResponseEntity<>(flightService.getAllFlights(), HttpStatus.OK);
     }
 
     // Display a specific flight
@@ -52,6 +57,16 @@ public class FlightController {
        flightService.cancelFlight(id);
         return new ResponseEntity(null, HttpStatus.NO_CONTENT);
     }
+
+    // Prevent passenger from being booked on a flight that is full
+//    @PatchMapping
+//    public ResponseEntity<Flight> canPassengerGetBookedOntoFlight(@RequestParam Flight name){
+//        boolean flight = flightService.canPassengerGetBookedOntoFlight(name);
+//        return new ResponseEntity(flight, HttpStatus.NOT_FOUND);
+//
+//    }
+
+
 
 
 }

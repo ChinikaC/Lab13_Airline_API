@@ -30,28 +30,46 @@ public class FlightService {
     }
 
     // Add passenger to flight
-    public Flight addPassengerToFlight(long flightId, Passenger passenger){
+    public Flight addPassengerToFlight(long flightId, Passenger passenger) {
         Flight flight = flightRepository.findById(flightId).get();
         List<Passenger> passengers = flight.getPassengers();
         passengers.add(passenger);
         flight.setPassengers(passengers);
         flightRepository.save(flight);
         return flight;
+
+//        if(flight.getCapacity() >= 150){
+//            return false;
+//        } // FINISH THIS!!
     }
 
-     // Cancel flight
-    public void cancelFlight(Long id){
-        flightRepository.deleteById(id);
-    }
-
-    // Prevent passenger from being booked on a flight that is full
-    public boolean canPassengerGetBookedOntoFlight(Flight flight){
-        if(flight.getCapacity() >= 200){
-            return false;
-        } else {
-            return true;
+        // Cancel flight
+        public void cancelFlight (Long id){
+            flightRepository.deleteById(id);
         }
+
+        // Filter flights
+    public List<Flight> findFlightByDestination(String destination){
+        return flightRepository.findFlightByDestination(destination);
     }
+
+        // Prevent passenger from being booked on a flight that is full
+
+//    public boolean canPassengerGetBookedOntoFlight(Flight flight){
+//        if(flight.getCapacity() >= 200){
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+
+//    public boolean canPassengerGetBookedOntoFlight(Flight flight){
+//        if(flight.getCapacity() >= 200){
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
 
 
