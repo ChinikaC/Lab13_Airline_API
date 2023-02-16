@@ -22,6 +22,7 @@ public class Passenger {
 
     @JsonIgnoreProperties({"passengers"})
     @ManyToMany(mappedBy = "passengers")
+
     private List<Flight> flights;
 
     public Passenger(String name, String email) {
