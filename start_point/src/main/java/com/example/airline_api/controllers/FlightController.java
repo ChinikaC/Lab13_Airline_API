@@ -17,56 +17,46 @@ public class FlightController {
     @Autowired
     FlightService flightService;
 
-    // Display all available flights
+     // Display all available flights and filter by destination
     @GetMapping
     public ResponseEntity<List<Flight>> getAllFlightsAndFilterByDestination(
-            @RequestParam(required = false, name = "destination") String destination){
+            @RequestParam(required = false, name = "destination") String destination) {
         // Filter by destination:
         List<Flight> flights;
-        if(destination != null){
+        if (destination != null) {
             return new ResponseEntity<>(flightService.findFlightByDestination(destination), HttpStatus.OK);
-        } // Get all flights:
-        return new ResponseEntity<>(flightService.getAllFlights(), HttpStatus.OK);
+        }
+            // Get all flights:
+            return new ResponseEntity<>(flightService.getAllFlights(), HttpStatus.OK);
+        }
+
+        // Display a specific flight
+        @GetMapping(value = "/{id}")
+        public ResponseEntity<Flight> getFlightById (@PathVariable Long id){
+            Flight findflight = flightService.getFlightById(id);
+            return new ResponseEntity<>(findflight, HttpStatus.OK);
+        }
+
+        // Add details of a new flight
+        @PostMapping
+        public ResponseEntity<Flight> addNewFlight (@RequestBody Flight flight){
+            flightService.addNewFlight(flight);
+            return new ResponseEntity<>(flight, HttpStatus.CREATED);
+        }
+
+        // Book a passenger on to a flight
+        @PatchMapping(value = "/{id}")
+        public ResponseEntity<Flight> addPassengerToFlight (@RequestBody Passenger passenger, @PathVariable Long id){
+                Flight flight = flightService.addPassengerToFlight(id, passenger);
+            return new ResponseEntity<>(flight, HttpStatus.OK);
+        }
+
+        // Cancel a flight
+        @DeleteMapping(value = "/{id}")
+        public ResponseEntity cancelFlight (@PathVariable Long id){
+            flightService.cancelFlight(id);
+            return new ResponseEntity(null, HttpStatus.NO_CONTENT);
+        }
+
+
     }
-
-    // Display a specific flight
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Flight> getFlightById(@PathVariable Long id){
-        Flight findflight = flightService.getFlightById(id);
-        return new ResponseEntity<>(findflight, HttpStatus.OK);
-    }
-
-    // Add details of a new flight
-    @PostMapping
-    public ResponseEntity<Flight> addNewFlight(@RequestBody Flight flight){
-        flightService.addNewFlight(flight);
-        return new ResponseEntity<>(flight, HttpStatus.CREATED);
-    }
-
-    // Book passenger on a flight
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Flight> addPassengerToFlight(@RequestBody Passenger passenger, @PathVariable long id){
-        Flight flight = flightService.addPassengerToFlight(id, passenger);
-        return new ResponseEntity<>(flight, HttpStatus.OK);
-
-    }
-
-    // Cancel flight
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity cancelFlight(@PathVariable Long id){
-       flightService.cancelFlight(id);
-        return new ResponseEntity(null, HttpStatus.NO_CONTENT);
-    }
-
-    // Prevent passenger from being booked on a flight that is full
-//    @PatchMapping
-//    public ResponseEntity<Flight> canPassengerGetBookedOntoFlight(@RequestParam Flight name){
-//        boolean flight = flightService.canPassengerGetBookedOntoFlight(name);
-//        return new ResponseEntity(flight, HttpStatus.NOT_FOUND);
-//
-//    }
-
-
-
-
-}

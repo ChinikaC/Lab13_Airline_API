@@ -3,7 +3,6 @@ package com.example.airline_api.services;
 import com.example.airline_api.models.Flight;
 import com.example.airline_api.models.Passenger;
 import com.example.airline_api.repositories.FlightRepository;
-import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,9 @@ public class FlightService {
 
 
     // Get all flights
-    public List<Flight> getAllFlights(){return flightRepository.findAll();}
+    public List<Flight> getAllFlights(){
+        return flightRepository.findAll();
+    }
 
     // Add new flights
     public Flight addNewFlight(Flight newFlight){
@@ -25,52 +26,28 @@ public class FlightService {
     }
 
     // Display a specific flight
-    public Flight getFlightById(long id){
+    public Flight getFlightById(Long id){
         return flightRepository.findById(id).get();
     }
 
-    // Add passenger to flight
-    public Flight addPassengerToFlight(long flightId, Passenger passenger) {
+    // Add passenger on to flight
+    public Flight addPassengerToFlight(Long flightId, Passenger passenger) {
         Flight flight = flightRepository.findById(flightId).get();
         List<Passenger> passengers = flight.getPassengers();
         passengers.add(passenger);
         flight.setPassengers(passengers);
         flightRepository.save(flight);
-        return flight;
+        return flight; }
 
-//        if(flight.getCapacity() >= 150){
-//            return false;
-//        } // FINISH THIS!!
-    }
-
-        // Cancel flight
+        // Cancel a flight
         public void cancelFlight (Long id){
             flightRepository.deleteById(id);
         }
 
-        // Filter flights
+        // Filter flights by destination
     public List<Flight> findFlightByDestination(String destination){
         return flightRepository.findFlightByDestination(destination);
     }
-
-        // Prevent passenger from being booked on a flight that is full
-
-//    public boolean canPassengerGetBookedOntoFlight(Flight flight){
-//        if(flight.getCapacity() >= 200){
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-
-//    public boolean canPassengerGetBookedOntoFlight(Flight flight){
-//        if(flight.getCapacity() >= 200){
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-
 
 
 

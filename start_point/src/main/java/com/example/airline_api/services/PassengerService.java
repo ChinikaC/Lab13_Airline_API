@@ -1,6 +1,6 @@
 package com.example.airline_api.services;
 
-import com.example.airline_api.models.Flight;
+
 import com.example.airline_api.models.Passenger;
 import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class PassengerService {
     public List<Passenger> getAllPassengers(){
         return passengerRepository.findAll();}
 
-    // Add passengers
+    // Add new passengers
     public Passenger addNewPassenger(Passenger newPassenger){
         return passengerRepository.save(newPassenger);
     }
